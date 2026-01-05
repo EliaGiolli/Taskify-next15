@@ -8,5 +8,6 @@ export interface ButtonProps {
 
 export interface TicketLayout {
     children: ReactNode,
-    spanText: string
+    spanText: string,
+    onAction?: () => void
 }
