@@ -1,17 +1,20 @@
 'use client'
 
+import { useState } from 'react';
 import ManageTicketLayout from '../layouts/ManageTicketLayout';
 import { MdDelete } from "react-icons/md";
 import type { Ticket } from '@/types/ticket'
 
 interface TicketCardProps {
-  ticket: Ticket
+  ticket: Ticket,
+  onDelete: (id:number) => void
 }
 
 
-function TicketCard({ ticket }: TicketCardProps) {
+function TicketCard({ ticket, onDelete }: TicketCardProps) {
+
   return (
-    <article className='border-2 border-violet-400 flex flex-col justify-center items-center text-center rounded-md p-3'>
+    <article className='border-2 border-violet-400 flex flex-col justify-center items-center text-center rounded-md px-4 py-8'>
         <div>
             <h2 className='text-violet-400 text-2xl p-2'>Ticket ID:{ticket.id}</h2>
         </div>
@@ -31,7 +34,10 @@ function TicketCard({ ticket }: TicketCardProps) {
                 </li>
             </ul>
         </div>
-        <ManageTicketLayout spanText='cancella ticket'>
+        <ManageTicketLayout 
+            spanText='cancella ticket'
+            onAction={() => onDelete(ticket.id)}    
+        >
             <MdDelete size={30}/>
         </ManageTicketLayout>
     </article>

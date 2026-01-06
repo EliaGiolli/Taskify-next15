@@ -1,17 +1,28 @@
 'use client'
 
-import TicketCard from "@/components/ui/TicketCard";
+import { useState } from 'react'
 import rawTickets from '@/data/tickets.json'
+import TicketCard from '@/components/ui/TicketCard'
 import type { Ticket } from '@/types/ticket'
 
-const tickets = rawTickets as Ticket[]
+export default function TicketsList() {
+  const [tickets, setTickets] = useState<Ticket[]>(
+    rawTickets as Ticket[]
+  )
 
-export default function Home() {
+  const deleteTicket = (id: number) => {
+    setTickets(prev => prev.filter(ticket => ticket.id !== id))
+  }
+
   return (
-    <div className="bg-zinc-900 text-white w-full grid grid-cols-2 md:grid-cols-3 gap-6 p-8 rounded-md">
+    <section className="grid md:grid-cols-2 gap-y-5 gap-x-6">
       {tickets.map(ticket => (
-        <TicketCard key={ticket.id} ticket={ticket} />
+        <TicketCard
+          key={ticket.id}
+          ticket={ticket}
+          onDelete={deleteTicket}
+        />
       ))}
-    </div>
-  );
+    </section>
+  )
 }
