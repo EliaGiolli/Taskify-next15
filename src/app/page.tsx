@@ -15,7 +15,7 @@ export default function TicketsList() {
   }
 
   return (
-    <section className="grid md:grid-cols-2 gap-y-5 gap-x-6">
+    <section className="grid md:grid-cols-2 gap-y-8 gap-x-7 mb-10">
       {tickets.map(ticket => (
         <TicketCard
           key={ticket.id}

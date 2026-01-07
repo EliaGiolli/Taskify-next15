@@ -19,15 +19,18 @@ function Header() {
   const incompletedTickets = getIncompleteTickets(tickets);
 
   return (
-    <header className="bg-zinc-900 w-full px-5 py-3 my-10 flex flex-col rounded-md ">
+    <header
+      role='banner' 
+      className="bg-zinc-900 w-full px-5 py-5 mb-10 flex flex-col rounded-md "
+    >
         <div className="w-full py-5 flex justify-center items-center gap-x-3">
             <Image src="/logo.jpg" height={50} width={60} alt="Ticketify logo"/>
             <span className="text-3xl md:text-4xl text-violet-400 uppercase">Ticketify</span>
         </div>
-        <nav className="w-full flex justify-center items-center gap-x-6 p-4">
-          <span className="text-lg md:text-2xl border-2 bg-blue-200 border-blue-600 text-black rounded-md p-2 cursor-pointer">Ticket totali: {totalTickets}</span>
-          <span className="text-lg md:text-2xl border-2 bg-green-200 border-green-400 text-slate-800 rounded-md p-2 cursor-pointer">Ticket completati: {completedTickets}</span>
-          <span className="text-lg md:text-2xl border-2 bg-red-200 border-red-500 text-black rounded-md p-2 cursor-pointer">Da completare: {incompletedTickets} </span>
+        <nav className="w-full flex justify-center items-center gap-x-6 p-4" role='navigation'>
+          <span className="text-sm md:text-2xl border-2 bg-blue-200 border-blue-600 text-black rounded-md p-2 cursor-pointer">Total: {totalTickets}</span>
+          <span className="text-sm md:text-2xl border-2 bg-green-200 border-green-400 text-slate-800 rounded-md p-2 cursor-pointer">Completed: {completedTickets}</span>
+          <span className="text-sm md:text-2xl border-2 bg-red-200 border-red-500 text-black rounded-md p-2 cursor-pointer">Uncompleted: {incompletedTickets} </span>
           <ManageTicketLayout 
             spanText="aggiungi ticket"
             onAction={() => setIsModalOpen(true)}
