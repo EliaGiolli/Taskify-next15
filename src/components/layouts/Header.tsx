@@ -5,7 +5,7 @@ import ManageTicketLayout from "./ManageTicketLayout";
 import CreateTicketModal from '../ui/CreateTicketsModal';
 import Image from "next/image";
 import { IoMdAdd } from "react-icons/io"; 
-import rawTickets from '@/data/tickets.json';
+import { ticketsList } from '@/data/tickets';
 import type { Ticket } from '@/types/ticket';
 import { getCompletedTickets, getIncompleteTickets, getTotalTickets } from '@/helpers/manageTicketsFunctions';
 
@@ -13,7 +13,7 @@ function Header() {
   
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const tickets = rawTickets as Ticket[];
+  const tickets = ticketsList;
   const totalTickets = getTotalTickets(tickets);
   const completedTickets = getCompletedTickets(tickets);
   const incompletedTickets = getIncompleteTickets(tickets);
@@ -21,7 +21,7 @@ function Header() {
   return (
     <header
       role='banner' 
-      className="bg-zinc-900 w-full px-5 py-5 mb-10 flex flex-col rounded-md "
+      className="bg-black w-full px-5 py-5 mb-10 flex flex-col rounded-md "
     >
         <div className="w-full py-5 flex justify-center items-center gap-x-3">
             <Image src="/logo.jpg" height={50} width={60} alt="Ticketify logo"/>

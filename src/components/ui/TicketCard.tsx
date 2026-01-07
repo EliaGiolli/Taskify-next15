@@ -27,7 +27,7 @@ function TicketCard({ ticket, onDelete }: TicketCardProps) {
             stiffness: 300,
             damping: 20,
         }}
-        className='border-2 border-violet-400 flex flex-col justify-center items-center text-center rounded-md px-3 py-8'
+        className='bg-black border-2 border-violet-400 flex flex-col justify-center items-center text-center rounded-md px-3 py-8'
     >
         <div className='flex items-center'>
             <Tickets size={32} className='text-violet-300' aria-hidden="true" />
