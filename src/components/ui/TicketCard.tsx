@@ -8,7 +8,7 @@ import { motion } from 'motion/react';
 
 interface TicketCardProps {
   ticket: Ticket,
-  onDelete: (id:number) => void
+  onDelete: () => void
 }
 
 
@@ -16,7 +16,7 @@ function TicketCard({ ticket, onDelete }: TicketCardProps) {
 
   return (
     <motion.article 
-        aria-labelledby='card-title'
+        aria-labelledby={`ticket-title-${ticket.id}`}
         role='region'
         whileHover={{
             rotate: 3,
@@ -32,7 +32,7 @@ function TicketCard({ ticket, onDelete }: TicketCardProps) {
         <div className='flex items-center'>
             <Tickets size={32} className='text-violet-300' aria-hidden="true" />
             <h2 
-                id="card-title"
+                id={`ticket-title-${ticket.id}`}
                 className='text-violet-400 text-2xl p-2'>
                     Ticket ID:{ticket.id}
             </h2>
@@ -55,7 +55,7 @@ function TicketCard({ ticket, onDelete }: TicketCardProps) {
         </div>
         <ManageTicketLayout 
             spanText='cancella ticket'
-            onAction={() => onDelete(ticket.id)}    
+            onAction={onDelete}    
         >
             <MdDelete size={30}/>
         </ManageTicketLayout>
