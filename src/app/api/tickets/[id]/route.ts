@@ -7,7 +7,7 @@ interface Params {
 
 export async function DELETE(_: Request, { params }: Params) {
   const id = Number(params.id)
-  const index = await ticketsList.findIndex(t => t.id === id)
+  const index = ticketsList.findIndex(t => t.id === id)
 
   if (index === -1) {
     return NextResponse.json({ error: 'Not found' }, { status: 404 })
