@@ -1,11 +1,10 @@
 import { NextResponse } from 'next/server'
-import { ticketsList } from '@/data/tickets'
-import { Ticket } from '@/types/ticket'
 import { createTicketSchema } from '@/schema/ticketSchema'
+import { getAllTickets, createTicket } from '@/database/tickets.model'
 
 
 export async function GET() {
-  return NextResponse.json(ticketsList, { status: 200 })
+  return NextResponse.json(getAllTickets(), { status: 200 })
 }
 
 export async function POST(req: Request) {
@@ -19,13 +18,11 @@ export async function POST(req: Request) {
     )
   }
 
-  const newTicket: Ticket = {
-    id: Date.now(),
-    status: 'incomplete',
-    ...parsed.data,
-  }
+  const newTicket = createTicket({
+     ...body,
+      status: 'incomplete',
+  })
 
-  ticketsList.push(newTicket)
 
   return NextResponse.json(newTicket, { status: 201 })
 }
