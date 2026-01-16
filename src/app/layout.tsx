@@ -33,13 +33,13 @@ export default function RootLayout({
           min-h-screen bg-zinc-900 text-zinc-200 px-8
         `} 
       >
-        <Header />
-        <main role="main">
-          <QueryProvider>
+        <QueryProvider>
+          <Header />
+          <main role="main">
             {children}
-          </QueryProvider>
-        </main>
-        <Footer />
+          </main>
+          <Footer />
+        </QueryProvider>
       </body>
     </html>
   );
