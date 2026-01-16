@@ -1,10 +1,15 @@
-import React from 'react'
-import { ButtonProps } from '@/types/customTypes'
+import { buttonVariants } from '@/helpers/buttonVariants';
+import { ButtonProps } from '@/types/customTypes';
+import { cn } from '@/helpers/cn';
 
-function Button({children, onClick, classname, ...props}: ButtonProps) {
+function Button({ children, onClick, className, variant, size, ...props }: ButtonProps) {
   return (
-    <button className={classname} onClick={onClick} {...props}>
-        {children}
+    <button 
+      className={cn(buttonVariants({ variant, size, className }))} 
+      onClick={onClick} 
+      {...props}
+    >
+      {children}
     </button>
   )
 }
