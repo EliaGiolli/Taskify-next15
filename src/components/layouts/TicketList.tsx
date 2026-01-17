@@ -4,11 +4,11 @@ import TicketCard from '@/components/ui/TicketCard'
 import { useFetchTickets } from '@/custom hooks/useFetchTickets';
 import { useDeleteTicket } from '@/custom hooks/useDeleteTicket';
 import type { Ticket } from '@/types/ticket';
-import TicketsLoading from '@/app/api/tickets/loading';
+import TicketsLoading from '@/app/tickets/loading';
 
 
 function TicketList() {
-    const { data, isLoading, error } = useFetchTickets();
+  const { data, isLoading, error } = useFetchTickets();
   const deleteTicket = useDeleteTicket()
 
   if (isLoading) return <TicketsLoading />
@@ -32,9 +32,9 @@ function TicketList() {
     <>
         {data.map((ticket:Ticket) => (
             <TicketCard
-            key={ticket.id}
-            ticket={ticket}
-            onDelete={() => deleteTicket.mutate(ticket.id)}
+              key={ticket.id}
+              ticket={ticket}
+              onDelete={() => deleteTicket.mutate(ticket.id)}
             />
         ))}
     </>

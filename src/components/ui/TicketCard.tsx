@@ -1,8 +1,10 @@
 'use client'
 
 import ManageTicketLayout from '../layouts/ManageTicketLayout';
+import Button from './Button';
 import { MdDelete } from "react-icons/md";
 import { Tickets } from 'lucide-react';
+import { X } from 'lucide-react';
 import type { Ticket } from '@/types/ticket'
 import { motion } from 'motion/react';
 
@@ -53,12 +55,22 @@ function TicketCard({ ticket, onDelete }: TicketCardProps) {
                 </li>
             </ul>
         </div>
-        <ManageTicketLayout 
-            spanText='cancella ticket'
-            onAction={onDelete}    
-        >
-            <MdDelete size={30}/>
-        </ManageTicketLayout>
+        <section className='flex gap-x-5'>
+            <ManageTicketLayout 
+                spanText='cancella ticket'
+                onAction={onDelete}    
+                >
+                <MdDelete size={30}/>
+            </ManageTicketLayout>
+            <Button 
+                variant="completed" 
+                size="md" 
+                className='flex items-center'
+            >
+                <X size={20} className='mr-3 text-violet-600'/>
+                Mark as completed
+            </Button>
+        </section>
     </motion.article>
   )
 }

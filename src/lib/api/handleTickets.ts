@@ -2,10 +2,17 @@ import { Ticket } from '@/types/ticket'
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? '/api'
 
-// GET
+// GET all tickets
 export async function getTickets(): Promise<Ticket[]> {
   const res = await fetch(`${BASE_URL}/tickets`)
   if (!res.ok) throw new Error('Errore fetch tickets')
+  return res.json()
+}
+
+// GET single ticket
+export async function getTicket(id: number): Promise<Ticket> {
+  const res = await fetch(`${BASE_URL}/tickets/${id}`)
+  if (!res.ok) throw new Error('Errore fetch ticket')
   return res.json()
 }
 
