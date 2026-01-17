@@ -33,6 +33,18 @@ export async function createTicket(data: {
   return res.json()
 }
 
+// PATCH - Update ticket status
+export async function updateTicketStatus(id: number, status: 'completed' | 'incomplete'): Promise<Ticket> {
+  const res = await fetch(`${BASE_URL}/tickets/${id}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ status }),
+  })
+
+  if (!res.ok) throw new Error('Errore aggiornamento ticket')
+  return res.json()
+}
+
 // DELETE
 export async function deleteTicket(id: number): Promise<void> {
   const res = await fetch(`${BASE_URL}/tickets/${id}`, {

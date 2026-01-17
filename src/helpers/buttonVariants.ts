@@ -15,8 +15,8 @@ export const buttonVariants = cva(
         // For destructive actions (delete, etc.)
         danger: 'bg-red-500 hover:bg-red-600 text-white flex justify-center items-center text-center gap-2',
 
-        // For completed tickets
-        completed: 'bg-transparent border-2 text-zinc-200 border-violet-700 hover:bg-zinc-800 text-zinc-200'
+        // For outline/secondary actions (mark as completed, etc.)
+        outline: 'bg-transparent border-2 border-violet-400 text-zinc-200 hover:bg-violet-400/10 hover:text-violet-400 flex justify-center items-center gap-2'
       },
       size: {
         sm: 'text-sm px-3 py-1.5',

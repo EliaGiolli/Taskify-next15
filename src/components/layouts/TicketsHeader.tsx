@@ -8,7 +8,7 @@ import { IoMdAdd } from "react-icons/io";
 import { useFetchTickets } from '@/custom hooks/useFetchTickets';
 import { getCompletedTickets, getIncompleteTickets, getTotalTickets } from '@/lib/manageTicketsFunctions';
 
-function Header() {
+function TicketsHeader() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { data: tickets = [], isLoading } = useFetchTickets();
 
@@ -20,12 +20,9 @@ function Header() {
   return (
     <header
       role='banner' 
-      className="bg-black w-full px-5 py-5 mb-10 flex flex-col rounded-md border-b-2 border-violet-400"
+      className="bg-zinc-900 w-full px-5 py-5 mb-10 flex flex-col rounded-md"
     >
-      <div className="w-full py-5 flex justify-center items-center gap-x-3">
-        <Image src="/logo.jpg" height={50} width={60} alt="Ticketify logo"/>
-        <span className="text-3xl md:text-4xl text-violet-400 uppercase">Ticketify</span>
-      </div>
+      <h1 className='text-2xl md:text-5xl text-center text-violet-400 pb-6 mb-6'>Tickets</h1>
       <nav className="w-full flex justify-center items-center gap-x-6 p-4" role='navigation'>
         <span className="text-sm md:text-2xl border-2 bg-blue-200 border-blue-600 text-black rounded-md p-2 cursor-pointer">
           Total: {isLoading ? '...' : totalTickets}
@@ -51,4 +48,4 @@ function Header() {
   )
 }
 
-export default Header
+export default TicketsHeader;

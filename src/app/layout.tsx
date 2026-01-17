@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-import Header from "@/components/layouts/Header";
+import MainHeader from "@/components/layouts/MainHeader";
 import Footer from "@/components/layouts/Footer";
 import QueryProvider from "@/components/layouts/QueryProvider";
 
@@ -34,7 +34,7 @@ export default function RootLayout({
         `} 
       >
         <QueryProvider>
-          <Header />
+          <MainHeader />
           <main role="main">
             {children}
           </main>

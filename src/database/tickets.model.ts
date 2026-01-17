@@ -23,6 +23,18 @@ export function createTicket(data: Omit<Ticket, 'id'>) {
   }
 }
 
+export function updateTicketStatus(id: number, status: 'completed' | 'incomplete'): Ticket {
+  const stmt = db.prepare(`UPDATE tickets SET status = ? WHERE id = ?`)
+  stmt.run(status, id)
+  
+  const updated = getTicketById(id)
+  if (!updated) {
+    throw new Error('Ticket not found after update')
+  }
+  
+  return updated
+}
+
 export function deleteTicket(id: number) {
   return db.prepare(`DELETE FROM tickets WHERE id = ?`).run(id)
 }
