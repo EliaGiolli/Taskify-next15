@@ -4,13 +4,14 @@ import TicketCard from '@/components/ui/TicketCard'
 import { useFetchTickets } from '@/custom hooks/useFetchTickets';
 import { useDeleteTicket } from '@/custom hooks/useDeleteTicket';
 import type { Ticket } from '@/types/ticket';
+import TicketsLoading from '@/app/api/tickets/loading';
 
 
 function TicketList() {
     const { data, isLoading, error } = useFetchTickets();
   const deleteTicket = useDeleteTicket()
 
-  if (isLoading) return <p className="text-slate-200">Loading...</p>
+  if (isLoading) return <TicketsLoading />
   
   if (error) {
     return (

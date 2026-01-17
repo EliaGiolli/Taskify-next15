@@ -1,11 +1,11 @@
-import { NextResponse } from 'next/server'
-import { createTicketSchema } from '@/schema/ticketSchema'
-import { getAllTickets, createTicket } from '@/database/tickets.model'
+import { NextResponse } from 'next/server';
+import { getAllTickets, createTicket } from '@/database/tickets.model';
+import { createTicketSchema } from '@/schema/ticketSchema';
 
 export async function GET() {
   try {
     const tickets = getAllTickets();
-    return NextResponse.json(tickets, { status: 200 });
+    return NextResponse.json(tickets);
   } catch (error) {
     console.error('Error fetching tickets:', error);
     return NextResponse.json(
