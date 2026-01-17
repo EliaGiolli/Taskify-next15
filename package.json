@@ -9,6 +9,7 @@
     "db:init": "tsx src/database/db.init.ts"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
     "@radix-ui/react-dialog": "^1.1.15",
     "@tanstack/react-query": "^5.90.16",
     "better-sqlite3": "^12.6.0",

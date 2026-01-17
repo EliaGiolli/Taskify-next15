@@ -1,50 +1,24 @@
-import { useState } from 'react';
-import { useCreateTicket } from '@/custom hooks/useCreateTicket';
-import type { CreateTicketModalProps } from '@/types/modalTypes';
-import Button from './Button';
+'use client'
 
-function ModalCardForm({ onOpenChange}: CreateTicketModalProps) {
-    const createTicket = useCreateTicket();
-    const [isSubmitting, setIsSubmitting] = useState(false);
-  
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      setIsSubmitting(true);
-  
-      const formData = new FormData(e.currentTarget);
-      const data = {
-        fullname: formData.get('fullname') as string,
-        telephone: formData.get('telephone') as string,
-        brand: formData.get('brand') as string,
-        comment: formData.get('comment') as string, // Changed from 'description'
-      };
-  
-      try {
-        await createTicket.mutateAsync(data);
-        // Reset form and close modal on success
-        e.currentTarget.reset();
-        onOpenChange(false);
-      } catch (error) {
-        console.error('Error creating ticket:', error);
-        // You could add error toast/notification here
-      } finally {
-        setIsSubmitting(false);
-      }
-    };
+import type { CreateTicketModalProps } from '@/types/modalTypes'
+import { useCreateTicketForm } from '@/custom hooks/useHookForm'
+import Button from './Button'
+
+function ModalCardForm({ onOpenChange }: CreateTicketModalProps) {
+  const { handleSubmit, isSubmitting } = useCreateTicketForm({
+    onSuccess: () => onOpenChange(false),
+  })
+
   return (
-    <>
     <form
-        onSubmit={handleSubmit}
-        className="mt-4 flex flex-col gap-4"  
-        role="form"
-        aria-label="Creazione nuovo ticket"
+      onSubmit={handleSubmit}
+      className="mt-4 flex flex-col gap-4"
+      role="form"
+      aria-label="Creazione nuovo ticket"
     >
-      {/* Nome */}
+      {/* Fullname */}
       <div className="flex flex-col gap-1">
-        <label
-          htmlFor="fullname"
-          className="text-sm text-slate-300"
-        >
+        <label htmlFor="fullname" className="text-sm text-slate-300">
           Fullname
         </label>
         <input
@@ -52,27 +26,14 @@ function ModalCardForm({ onOpenChange}: CreateTicketModalProps) {
           name="fullname"
           type="text"
           placeholder="Mario Rossi"
-          className="
-            bg-slate-900
-            text-slate-200
-            border border-slate-700
-            rounded-md
-            px-3 py-2
-            placeholder:text-slate-500
-            focus-visible:outline-none
-            focus-visible:ring-2
-            focus-visible:ring-violet-500
-          "
+          className="bg-slate-900 text-slate-200 border border-slate-700 rounded-md px-3 py-2 placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500"
           required
         />
       </div>
 
       {/* Telephone */}
       <div className="flex flex-col gap-1">
-        <label
-          htmlFor="telephone"
-          className="text-sm text-slate-300"
-        >
+        <label htmlFor="telephone" className="text-sm text-slate-300">
           Telephone
         </label>
         <input
@@ -87,10 +48,7 @@ function ModalCardForm({ onOpenChange}: CreateTicketModalProps) {
 
       {/* Brand */}
       <div className="flex flex-col gap-1">
-        <label
-          htmlFor="brand"
-          className="text-sm text-slate-300"
-        >
+        <label htmlFor="brand" className="text-sm text-slate-300">
           Car Brand
         </label>
         <input
@@ -103,47 +61,31 @@ function ModalCardForm({ onOpenChange}: CreateTicketModalProps) {
         />
       </div>
 
-        {/* Comment - CHANGED from 'description' */}
-        <div className="flex flex-col gap-1">
-          <label
-            htmlFor="comment"
-            className="text-sm text-slate-300"
-          >
-            Describe in detail the problem you're facing
-          </label>
-          <textarea
-            id="comment"
-            name="comment"
-            rows={4}
-            placeholder="Describe in detail the problem you're facing"
-            className="
-              bg-slate-900
-              text-slate-200
-              border border-slate-700
-              rounded-md
-              px-3 py-2
-              placeholder:text-slate-500
-              focus-visible:outline-none
-              focus-visible:ring-2
-              focus-visible:ring-violet-500
-              resize-none
-            "
-            required
-          />
-        </div>
+      {/* Comment */}
+      <div className="flex flex-col gap-1">
+        <label htmlFor="comment" className="text-sm text-slate-300">
+          Describe in detail the problem you're facing
+        </label>
+        <textarea
+          id="comment"
+          name="comment"
+          rows={4}
+          placeholder="Describe in detail the problem you're facing"
+          className="bg-slate-900 text-slate-200 border border-slate-700 rounded-md px-3 py-2 placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 resize-none"
+          required
+        />
+      </div>
 
-        {/* Submit */}
-        <Button
-          type="submit"
-          disabled={isSubmitting}
-          variant="submit"
-          size="md"
-          className="mt-2 focus-visible:ring-violet-400"
-        >
-          {isSubmitting ? 'Creating...' : 'Create ticket'}
-        </Button>
-      </form>
-    </>
+      <Button
+        type="submit"
+        disabled={isSubmitting}
+        variant="submit"
+        size="md"
+        className="mt-2 focus-visible:ring-violet-400"
+      >
+        {isSubmitting ? 'Creating...' : 'Create ticket'}
+      </Button>
+    </form>
   )
 }
 
